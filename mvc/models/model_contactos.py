@@ -15,30 +15,51 @@ class ModelContactos:
         except Exception as error:
             print(f"ERROR 100: {error.args[0]}")
 
-    contacto{
-        
-    }
-
     def obtenerContactos(self):
-        # SELECT * FROM contactos;
-        response = self.supabase.table("contactos").select("*").execute()
-        return response.data
+        try:
+            # SELECT * FROM contactos;
+            response = self.supabase.table("contactos").select("*").execute()
+            return response.data
+        except Exception as error:
+            print(f"ERROR 101: {error.args[0]}")
 
     def buscarContacto(self, id_contacto:int):
-        response = self.supabase.table("contactos").select("*").eq("id_contacto",id_contacto).execute()
-        return response.data
+        try: 
+            response = self.supabase.table("contactos").select("*").eq("id_contacto",id_contacto).execute()
+            return response.data
+        except Exception as error:
+            print(f"ERROR 102: {error.args[0]}")
 
     def insertarContacto(self, nombre:str, email:str, telefono:str):
-        response = self.supabase.table("contactos").insert({"nombre":nombre, "email":email, "telefono":telefono}).execute()
-        return response.data
+        try:
+            contacto = {
+                    "nombre": nombre,
+                    "email": email,
+                    "telefono": telefono
+            }
+            response = self.supabase.table("contactos").insert(contacto).execute()
+            return response.data
+        except Exception as error:
+            print(f"ERROR 103: {error.args[0]}")
 
     def borrarContacto(self, id_contacto):
-        response = self.supabase.table("contactos").delete().eq("id_contacto",id_contacto).execute()
-        return response.data
+        try:
+            response = self.supabase.table("contactos").delete().eq("id_contacto",id_contacto).execute()
+            return response.data
+        except Exception as error:
+            print(f"ERROR 104: {error.args[0]}")
 
     def actualizarContacto(self, id_contacto: int, nombre, email, telefono):
-        response = self.supabase.table("contactos").update({"nombre":nombre, "email":email, "telefono":telefono}).eq("id_contacto",id_contacto).execute()
-        return response.data
+        try: 
+            contacto = {
+                    "nombre": nombre,
+                    "email": email,
+                    "telefono": telefono
+            }
+            response = self.supabase.table("contactos").update(contacto).eq("id_contacto",id_contacto).execute()
+            return response.data
+        except Exception as error:
+            print(f"ERROR 105: {error.args[0]}")
 
 if __name__ == "__main__":
     model_contactos = ModelContactos()
