@@ -1,21 +1,35 @@
-$def with(datos)
+$def with (datos)
 <h1>Contactos</h1>
+
+<a href="/insertar_contacto">Nuevo contacto</a>
 
 <table>
     <thead>
-        <td>ID</td>
-        <td>Nombre</td>
-        <td>Email</td>
-        <td>Teléfono</td>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Ver</th>
+        <th>Actualizar</th>
+        <th>Borrar</th>
     </thead>
     <tbody>
+        <tr>
+            <td>1</td>
+            <td>Dejah</td>
+            <td>dejah@email.cm</td>
+            <td>11111111</td>
+        </tr>
         $for contacto in datos:
             <tr>
                 <td>$contacto['id_contacto']</td>
                 <td>$contacto['nombre']</td>
                 <td>$contacto['email']</td>
                 <td>$contacto['telefono']</td>
+                <td><a href="/ver_contacto/$contacto['id_contacto']">ver</a></td>
+                <td><a href="/actualizar_contacto/$contacto['id_contacto']">Actualizar</a></td>
+                <td><a href="/borrar_contacto/$contacto['id_contacto']">Borrar</a></td>
             </tr>
     </tbody>
-</table><br>
+</table>
 <a href="/">Index</a>

@@ -1,0 +1,1 @@
+INSERT INTO public.prueba (id, created_at, nombre, email, telefono) VALUES (1, '2026-11-03 15:57:44.038297+00', 'Dejah Thoris', 'dejah@email.com', '11111111111'), (2, '2026-11-03 15:58:12.363893+00', 'John', 'john@email.com', '22222222');

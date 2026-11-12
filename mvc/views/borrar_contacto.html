@@ -1,0 +1,21 @@
+$def with (contacto)
+
+$if contacto != []:
+    <h2>¿Deseas borrar este contacto?</h2>
+    <form name="contacto" method="POST">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" id="nombre" value="$contacto['nombre']" readonly><br>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="$contacto['email']" readonly><br>
+
+        <label for="telefono">Teléfono</label>
+        <input type="tel" name="telefono" id="telefono" value="$contacto['telefono']" readonly><br>
+
+        <button type="submit" name="borrar" id="borrar">Borrar</button>
+        <a href="/contactos"><button type="button" name="regresar" id="regresar">Regresar</button></a>
+    </form>
+
+$else:
+    <h2>Contacto no encontrado</h2>
+    <a href="/contactos">Regresar</a>
