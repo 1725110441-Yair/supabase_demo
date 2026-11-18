@@ -78,12 +78,13 @@ class ModelContactos:
             logger.error(f"ERROR 300: {str(error)}")
             return []
 
-    def insertarContacto(self, nombre: str, email: str, telefono: str):
+    def insertarContacto(self, nombre: str, email: str, telefono: str, foto: str):
         try:
             response = self.supabase.table("contactos").insert({
                 "nombre": nombre,
                 "email": email,
-                "telefono": telefono
+                "telefono": telefono,
+                "foto": foto
             }).execute()
             return response.data
         except Exception as error:
@@ -103,7 +104,7 @@ class ModelContactos:
             logger.error(f"ERROR 500: {str(error)}")
             return []
 
-    def actualizarContacto(self, id_contacto: int | str, nombre: str, email: str, telefono: str):
+    def actualizarContacto(self, id_contacto: int | str, nombre: str, email: str, telefono: str, foto: str):
         try:
             if isinstance(id_contacto, str) and ":" in id_contacto:
                 id_contacto = self.validar_hash(id_contacto)
@@ -113,19 +114,24 @@ class ModelContactos:
             response = self.supabase.table("contactos").update({
                 "nombre": nombre,
                 "email": email,
-                "telefono": telefono
+                "telefono": telefono,
+                "foto": foto
             }).eq("id_contacto", id_contacto).execute()
             return response.data
         except Exception as error:
             logger.error(f"ERROR 600: {str(error)}")
             return []
 
+    def actualizarFoto(self, foto: str):
+        response = self.supabase.table("contactos").update({"foto":foto}).is_("foto", "null").execute()
+        return response.data
 
 if __name__ == "__main__":
     model_contactos = ModelContactos()
 
     #print(model_contactos.obtenerContactos())
     #print(model_contactos.buscarContacto(1))
-    #print(model_contactos.insertarContacto("Carmelo Perez", "carmelo@email.com", "1111234"))
-    print(model_contactos.borrarContacto(3))
-    print(model_contactos.actualizarContacto(1))
+    #print(model_contactos.insertarContacto("Carmelo Perez", "carmelo@email.com", "1111234", "carmelo.png"))
+    #print(model_contactos.borrarContacto(3))
+    #print(model_contactos.actualizarContacto(1))
+    #print(model_contactos.actualizarFoto("default.jpg"))
