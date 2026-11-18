@@ -5,7 +5,6 @@ $def with (datos)
 
 <table>
     <thead>
-        <th>ID</th>
         <th>Nombre</th>
         <th>Email</th>
         <th>Teléfono</th>
@@ -14,15 +13,8 @@ $def with (datos)
         <th>Borrar</th>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>Dejah</td>
-            <td>dejah@email.cm</td>
-            <td>11111111</td>
-        </tr>
         $for contacto in datos:
             <tr>
-                <td>$contacto['id_contacto']</td>
                 <td>$contacto['nombre']</td>
                 <td>$contacto['email']</td>
                 <td>$contacto['telefono']</td>
