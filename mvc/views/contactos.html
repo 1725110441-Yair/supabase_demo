@@ -5,6 +5,7 @@ $def with (datos)
 
 <table>
     <thead>
+        <th>Foto</th>
         <th>Nombre</th>
         <th>Email</th>
         <th>Teléfono</th>
@@ -15,10 +16,11 @@ $def with (datos)
     <tbody>
         $for contacto in datos:
             <tr>
+                <td><img src="static/images/$contacto['foto']" height="50px" width="50px"></td>
                 <td>$contacto['nombre']</td>
                 <td>$contacto['email']</td>
                 <td>$contacto['telefono']</td>
-                <td><a href="/ver_contacto/$contacto['id_contacto']">ver</a></td>
+                <td><a href="/ver_contacto/$contacto['id_contacto']">Ver</a></td>
                 <td><a href="/actualizar_contacto/$contacto['id_contacto']">Actualizar</a></td>
                 <td><a href="/borrar_contacto/$contacto['id_contacto']">Borrar</a></td>
             </tr>

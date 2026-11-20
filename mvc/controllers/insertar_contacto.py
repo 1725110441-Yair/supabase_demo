@@ -1,3 +1,4 @@
+import os
 import web
 from mvc.models.model_contactos import ModelContactos
 
@@ -13,7 +14,7 @@ class InsertarContacto:
     #utilizando el atributo 'name'
     def POST(self):
         #accede a los datos del formulario contactos
-        formulario = web.input()
+        formulario = web.input(foto = {})
         #obtiene el valor del input nombre
         nombre = formulario['nombre']
         #obtiene el valor del input email
@@ -21,16 +22,17 @@ class InsertarContacto:
         #obtiene el valor del input telefono
         telefono = formulario['telefono']
 
-        #imprime los datos para verificar que se obtienes los valores
-        #de forma correcta
-        #print(f"Nombre: {nombre}")
-        #rint(f"Email: {email}")
-        #print(f"Telefono: {telefono}")
+        archivo = formulario['foto']
+        foto = archivo.filename
+
+        ruta = os.path.join("static/images/",foto)
+        with open(ruta, "wb") as file:
+            file.write(formulario.foto.file.read())
 
         #inserta el contacto en la base de datos de Supabase
         model_contactos = ModelContactos()
 
-        datos = model_contactos.insertarContacto(nombre,email,telefono)
+        datos = model_contactos.insertarContacto(nombre,email,telefono,foto)
 
         html = """
             <h1>Contacto almacenado correctamente</h1>
